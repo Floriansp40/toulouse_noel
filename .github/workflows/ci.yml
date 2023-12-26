@@ -91,5 +91,15 @@ jobs:
                 SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
                 SONAR_HOST_URL: ${{ secrets.SONART_HOST }}
 
+            - name: Node
+              uses: actions/setup-node@v3
+              with:
+                node-version: 18.x
+            - name: Install Dependencies
+              run: npm i
+            - name: Sonar for front
+              working-directory: ./front
+              run: npm run sonartest     
+
 
               
