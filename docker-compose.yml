@@ -1,0 +1,51 @@
+version: '3.1'
+
+services:
+  bdd:
+    container_name: noel_mysql
+    image: mysql:latest
+    restart: always
+    volumes:
+      - ./back/mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: toor
+      MYSQL_DATABASE: noel
+      MYSQL_USER: noel
+      MYSQL_PASSWORD: noel
+    profiles:
+      - prod
+      - test
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 9090:8080
+    profiles:
+      - test
+    
+  api:
+    container_name: noel_back
+    image: noel_back
+    restart: always
+    environment:
+      DB_HOST: bdd
+    profiles:
+      - prod
+      - test
+
+  front:
+    container_name: noel_front
+    image: noel_front
+    restart: always
+    environment:
+      REACT_APP_API_URL: api
+      REACT_APP_MARCEL: roger
+      ROGER: ouais
+    ports:
+      - 8080:3000
+    profiles:
+      - prod
+      - test
+
+  
