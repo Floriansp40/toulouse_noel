@@ -96,6 +96,7 @@ jobs:
               with:
                 node-version: 18.x
             - name: Install Dependencies
+              working-directory: ./front
               run: npm i
             - name: Sonar for front
               working-directory: ./front
