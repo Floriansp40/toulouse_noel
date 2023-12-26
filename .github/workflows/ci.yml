@@ -58,6 +58,12 @@ jobs:
             - name: Run User Test
               run: npm run test:file user_routes
 
+            - name: SonarQube Test
+              uses: sonarsource/sonarqube-scan-action@master
+              env:
+                SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+                SONAR_HOST_URL: ${{ secrets.SONART_HOST }}
+
     frontend:        
         if: ${{ !contains(github.event.head_commit.message, '#code')}}
         runs-on: ubuntu-latest
