@@ -53,7 +53,10 @@ jobs:
               run: npm run test:file init_bdd
 
             - name: Run Main Test
-              run: npm run test:file main_routes   
+              run: npm run test:file main_routes
+              
+            - name: Run User Test
+              run: npm run test:file user_routes
 
     frontend:        
         if: ${{ !contains(github.event.head_commit.message, '#code')}}
