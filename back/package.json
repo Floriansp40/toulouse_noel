@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "node -r dotenv/config index.js",
-    "dev": "nodemon -r dotenv/config index.js"
+    "dev": "nodemon -r dotenv/config index.js",
+    "test": "jest --setupFiles dotenv/config --runInBand --testPathIgnorePatterns=init_bdd.test.js",
+    "test:file": "func() { jest ${1}.test.js --setupFiles dotenv/config; }; func",
+    "test:cov": "jest --setupFiles dotenv/config --coverage --runInBand --testPathIgnorePatterns=init_bdd.test.js"
   },
   "keywords": [],
   "author": "",
