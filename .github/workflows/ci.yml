@@ -56,7 +56,7 @@ jobs:
               run: npm run test:file main_routes
               
             - name: Run User Test
-              run: npm run test:file user_routes
+              run: npm run test:file user_routes            
 
     frontend:        
         if: ${{ !contains(github.event.head_commit.message, '#code')}}
@@ -85,12 +85,22 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v3            
 
-            - name: Setup node
+            - name: SonarQube Test
+              uses: sonarsource/sonarqube-scan-action@master
+              env:
+                SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+                SONAR_HOST_URL: ${{ secrets.SONART_HOST }}
+
+            - name: Node
               uses: actions/setup-node@v3
               with:
                 node-version: 18.x
             - name: Install Dependencies
-              run: echo "yes"
+              working-directory: ./front
+              run: npm i
+            - name: Sonar for front
+              working-directory: ./front
+              run: npm run sonartest     
 
 
               
